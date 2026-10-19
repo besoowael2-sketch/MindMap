@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memories</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#0f0f1a,#1c1c3c,#000000);
+  color: white;
+  overflow: hidden;
+}
+
+/* SECTIONS */
+section{
+  display: flex;
+  justify-content: center;
+  gap: 250px;
+  margin: 20px 0;
+}
+
+/* IMAGES */
+img{
+    width: 180px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: imgAppear 1s forwards;
+    transition: 0.4s;
+}
+
+img:hover{
+    transform: scale(1.1);
+    box-shadow:0 0 20px #00f7ff;
+}
+
+.sec1 img:nth-child(1){animation-delay: 0.5s;}
+.sec1 img:nth-child(2){animation-delay: 1s;}
+.sec2 img:nth-child(1){animation-delay: 1.5s;}
+.sec2 img:nth-child(2){animation-delay: 2s;}
+
+@keyframes imgAppear{
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+/* INTRO TEXT */
+.intro{
+  text-align:center;
+  z-index:2;
+  margin: 10px 0; /* بدل margin-bottom كبير */
+}
+
+.title span{
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+}
+
+.title span:nth-child(1){animation-delay:0.4s;}
+.title span:nth-child(2){animation-delay:0.6s;}
+.title span:nth-child(3){animation-delay:0.8s;}
+.title span:nth-child(4){animation-delay:1s;}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+p{
+    font-size: 20px;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeText 2s forwards;
+    animation-delay:1.2s;
+}
+
+@keyframes fadeText{
+    to{
+        opacity:1;
+    }
+}
+
+/* GLITCH EFFECT */
+.glitch{
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch{
+    0% { text-shadow: 2px 0 red; }
+    20% { text-shadow: -2px 0 blue; }
+    40% { text-shadow: 2px 0 green; }
+    60% { text-shadow: none; }
+    100% { text-shadow: none; }
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 3;
+}
+
+.scroll-indicator span{
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    transform: rotate(45deg);
+    animation: scroll 1.5s infinite;
+}
+
+@keyframes scroll{
+    0%{
+        opacity:0;
+        transform: rotate(45deg) translate(-10px,-10px);
+    }
+    50%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform: rotate(45deg) translate(10px,10px);
+    }
+}
+</style>
+</head>
+<body>
+
+<section class="sec1">
+    <img src="boy.jpg" alt="Boy">
+    <img src="clock.jpg" alt="Clock">
+</section>
+
+<div class="intro">
+    <h1 class="title">
+        <span>Memories</span>
+        <span>never</span>
+        <span>truly</span>
+        <span>fade</span>
+    </h1>
+    <p>
+        They <span class="glitch">blur</span>.<br>
+        They <span class="glitch">distort</span>.<br>
+        But they <span class="glitch">shape</span> who we are.
+    </p>
+</div>
+
+<section class="sec2">
+    <img src="road.jpg" alt="Road">
+    <img src="light.jpg" alt="Light">
+</section>
+
+<a href="index3.html" class="scroll-indicator">
+    <span></span>
+</a>
+
+</body>
+</html>

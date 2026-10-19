@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+              height: 95vh;
+            padding: 10px;
+            background: linear-gradient(-45deg,#03030f,#041f70,#0f3460,#00f7ff);
+            background-size: 400% 400%;
+            animation: move 9s ease infinite;
+            transition: 1s;
+           font-family: Verdana, Geneva, Tahoma, sans-serif;
+            
+            background-color: black;
+            /* animation: hello 6s normal infinite ; */
+        }
+        div{
+            position: relative;
+        }
+       .intro{
+           
+            color: rgb(255, 255, 255);
+            
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+z-index: 1;
+        
+             
+         
+        }
+        p{
+            font-size: 30px;
+           
+          animation: glow 1.5s ease-in-out infinite alternate;
+            color: aliceblue;
+            width: fit-content;
+            
+            
+        }
+        h1{
+           
+            width: fit-content;
+            animation: glow 1.5s infinite alternate;
+            margin-left: 140px;
+            font-size: 45px;
+        }
+       
+        .btn{
+            border-radius: 30px;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            background-color: #6c5ce7;
+            color: white;
+            cursor: pointer;
+            transition: all .3s ease;
+            text-decoration: none;
+            
+           
+             
+        }
+        .btn:hover{
+           transform: scale(1.1);
+           box-shadow: 0 0 15px #a29bfe,
+            0 0 30px #a29bfe;
+            
+        }
+        @keyframes glow{
+           from{
+            text-shadow: 0 0 10px #00f7ff, 
+            0 0 20px #00f7ff,
+            0 0 30px #00f7ff;
+
+           }
+           to{text-shadow:    0 0 20px #ff00ff,
+            0 0 20px #ff00ff,
+              0 0 20px #ff00ff,;
+
+           }
+        }
+        @keyframes move{
+            0%{background-position: 0% 50%;}
+            50%{background-position: 100% 50%;}
+            100%{background-position: 0% 50%;}
+
+        }
+    </style>
+</head>
+<body>
+   <center>
+    <div class="intro">
+       <h1>ENTER THE MIND</h1>
+        <p>A journey through thoughts,fears,and ambitoin </p>
+        <br>
+        <a href="index2.html" class="btn">Begin the Descent</a>
+        </center>
+    </div>
+</body>
+</html>

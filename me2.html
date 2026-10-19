@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Control</title>
+
+<style>
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --green: #22c55e;
+  --red: #ef4444;
+}
+
+.light {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+}
+
+body {
+  margin:0;
+  font-family: system-ui;
+  background: var(--bg);
+  color: var(--text);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  transition:0.3s;
+}
+
+.card {
+  background: var(--card);
+  padding:25px;
+  border-radius:20px;
+  width:320px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+h1 { margin-bottom:5px; }
+
+.status {
+  display:flex;
+  justify-content:space-between;
+  margin:20px 0;
+}
+
+.box {
+  flex:1;
+  margin:5px;
+  padding:10px;
+  border-radius:10px;
+  background:#00000020;
+}
+
+.value {
+  font-weight:bold;
+  font-size:18px;
+}
+
+/* ألوان المود */
+.auto {
+  color: #a855f7;
+}
+
+.manual {
+  color: #3b82f6;
+}
+
+button {
+  margin:5px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.15s;
+}
+
+button:active {
+  transform:scale(0.9);
+}
+
+.on { background:var(--green); color:white; }
+.off { background:var(--red); color:white; }
+.modeBtn { background:#3b82f6; color:white; }
+.themeBtn { background:#f59e0b; color:white; }
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>⚙ Smart Control</h1>
+
+  <div class="status">
+    <div class="box">
+      <div>MODE</div>
+      <div id="mode" class="value">--</div>
+    </div>
+
+    <div class="box">
+      <div>RELAY</div>
+      <div id="relay" class="value">--</div>
+    </div>
+  </div>
+
+  <button class="on" onclick="clickSound();setRelay(1)">ON</button>
+  <button class="off" onclick="clickSound();setRelay(0)">OFF</button>
+
+  <button id="modeBtn" class="modeBtn" onclick="clickSound();toggleMode()">
+    Loading...
+  </button>
+
+  <button class="themeBtn" onclick="toggleTheme()">🌙 / ☀️</button>
+
+</div>
+
+<script>
+
+// صوت خفيف جدًا
+function clickSound(){
+  let ctx = new (window.AudioContext || window.webkitAudioContext)();
+  let osc = ctx.createOscillator();
+  osc.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + 0.05);
+}
+
+// تشغيل / إيقاف
+function setRelay(state){
+  fetch(state?"/on":"/off")
+  .then(()=>update());
+}
+
+// تغيير مود
+function toggleMode(){
+  fetch("/mode")
+  .then(()=>update());
+}
+
+// تحديث الحالة
+function update(){
+  fetch("/status")
+  .then(r=>r.json())
+  .then(data=>{
+
+    // المود
+    let modeEl = document.getElementById("mode");
+    modeEl.innerText = data.mode;
+
+    if(data.mode === "MANUAL"){
+      modeEl.className = "value manual";
+    } else {
+      modeEl.className = "value auto";
+    }
+
+    // الريلاي
+    let relayEl = document.getElementById("relay");
+    relayEl.innerText = data.relay;
+    relayEl.style.color =
+      data.relay==="ON" ? "#22c55e" : "#ef4444";
+
+    // زر المود
+    let btn = document.getElementById("modeBtn");
+    if(data.mode === "MANUAL"){
+      btn.innerText = "Switch to AUTO";
+    } else {
+      btn.innerText = "Switch to MANUAL";
+    }
+
+  })
+  .catch(()=>console.log("ESP not responding"));
+}
+
+// دارك / لايت
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",
+    document.body.classList.contains("light")?"light":"dark");
+}
+
+// تحميل الثيم
+if(localStorage.getItem("theme")==="light"){
+  document.body.classList.add("light");
+}
+
+// تحديث كل 2 ثانية
+setInterval(update,2000);
+update();
+
+</script>
+
+</body>
+</html>

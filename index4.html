@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambition</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+
+/* Light Gradient Background */
+
+background: linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#00c6ff);
+background-size:400% 400%;
+animation:bgMove 10s infinite ease-in-out;
+}
+
+/* Background animation */
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* TITLE */
+
+.title{
+font-size:48px;
+margin-bottom:50px;
+animation: rise 2s ease forwards;
+opacity:0;
+}
+
+/* TEXT */
+
+.line{
+font-size:26px;
+margin:10px;
+opacity:0;
+animation: rise 2s ease forwards;
+}
+
+.line:nth-child(2){animation-delay:1s;}
+.line:nth-child(3){animation-delay:2s;}
+.line:nth-child(4){animation-delay:3s;}
+
+/* RISE EFFECT */
+
+@keyframes rise{
+from{
+transform:translateY(50px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+/* LINES GOING UP */
+
+.lines{
+position:absolute;
+bottom:0;
+width:100%;
+display:flex;
+justify-content:space-around;
+}
+
+.lines span{
+width:3px;
+height:0;
+background:rgba(255,255,255,0.4);
+animation: grow 3s infinite;
+}
+
+.lines span:nth-child(2){animation-delay:1s;}
+.lines span:nth-child(3){animation-delay:2s;}
+.lines span:nth-child(4){animation-delay:0.5s;}
+
+/* GROW ANIMATION */
+
+@keyframes grow{
+0%{
+height:0;
+}
+50%{
+height:200px;
+}
+100%{
+height:0;
+}
+}
+
+
+.scroll-indicator{
+position: fixed;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+cursor: pointer;
+}
+
+.scroll-indicator span{
+display: block;
+width: 25px;
+height: 25px;
+border-bottom: 3px solid white;
+border-right: 3px solid white;
+transform: rotate(45deg);
+animation: scroll 1.5s infinite;
+}
+
+@keyframes scroll{
+0%{
+opacity:0;
+transform: rotate(45deg) translate(-10px,-10px);
+}
+50%{
+opacity:1;
+}
+100%{
+opacity:0;
+transform: rotate(45deg) translate(10px,10px);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="title">Ambition pushes upward.</h1>
+
+<div class="line">Through doubt.</div>
+<div class="line">Through fear.</div>
+<div class="line">Toward something greater.</div>
+
+<div class="lines">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<a href="index5.html" class="scroll-indicator">
+  <span></span>
+</a>
+</body>
+</html>
