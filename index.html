@@ -50,7 +50,7 @@ z-index: 1;
            
             width: fit-content;
             animation: glow 1.5s infinite alternate;
-            margin-left: 140px;
+            margin-left: 0;
             font-size: 45px;
         }
        
@@ -93,7 +93,8 @@ z-index: 1;
             100%{background-position: 0% 50%;}
 
         }
-    </style>
+    @media(max-width:600px){body{min-height:100svh;height:auto;padding:18px 14px;overflow-x:hidden}.intro{width:calc(100% - 28px);max-width:100%;top:50%;left:50%}h1{font-size:clamp(27px,8vw,40px);margin:0 auto 22px;width:100%;overflow-wrap:anywhere}p{font-size:clamp(15px,4.3vw,20px);width:100%;line-height:1.6;margin:0 auto 26px}.btn{display:inline-block;font-size:15px;padding:13px 18px;max-width:100%}}
+</style>
 </head>
 <body>
    <center>
